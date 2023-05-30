@@ -33,6 +33,9 @@
 			text-align:center;
 			clear:both; /* ride below all items */
 		}
+		.move-right {
+            margin-left: 30px; /* Adjust the value as needed */
+        }
     </style>
 </head>
 <body>
@@ -42,10 +45,22 @@
     <main>
 	 <header><h3>A JavaScript Project by YOUR NAME HERE</h3></header>
 	 <h3 id="my-greeting">Greeting Goes Here</h3>
-	    <p>Explain what your page does and how it works here!</p>
+	    <p> This web page uses JavaScript to determine the current hour, 
+			and presents a different image, custom message, and color based on 
+			each of the following times of day:</p>
+
+		<p>
+			<ul class="move-right">
+				<li>Morning (5am to 12 noon)</li>
+				<li>Afternoon (12 noon to 6pm)</li>
+				<li>Evening (6pm to 11pm)</li>
+				<li>Night (11pm to 5am)</li>
+			</ul>
+
+		</p>
 	  <img id="my-pic" src="http://dummyimage.com/300x400" alt="Time of Day Image" class="flexible">
      <footer>
-      <p><small>&copy; 2022 by 
+      <p><small>&copy; 2022-<span id="copyright">year goes here</span> by 
           Mohammed Ali, All Rights Reserved ~ 
           <a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
           <a id="css-checker" href="#" target="_blank">Check CSS</a></small>
@@ -68,28 +83,37 @@
 
    */
 
-
 	let myDate = new Date();
 	let myHour = myDate.getHours();
 	let myGreeting = "";
 	let myColor = "";
 	let myPic = "";
-
-	//myHour = 11;
+	let myYear = myDate.getFullYear();
 
 	console.log(myHour);
 
-	if(myHour < 12){
-		//alert("good morning!");
+	if(myHour >= 5 && myHour < 12){
 		myGreeting = "Good morning!";
 		myColor = "orange";
 		myPic = "morning.jpg";
-	}else{
-		//alert("good afternoon!");
+
+	} else if(myHour >= 12 && myHour < 18){	
 		myGreeting = "Good afternoon!";
 		myColor = "green";
 		myPic = "afternoon.jpg";
+
+	} else if(myHour >= 18 && myHour < 23){	
+		myGreeting = "Good evening!";
+		myColor = "blue";
+		myPic = "evening.jpg";
+
+	}else{
+		myGreeting = "Good night!";
+		myColor = "purple";
+		myPic = "night.jpg";
 	}
+
+
 
 	myPic = "images/" + myPic;
 
@@ -97,7 +121,7 @@
 	document.querySelector("html").style.backgroundColor = myColor;
 	document.getElementById("my-pic").src = myPic;
 
-
+	document.getElementById("copyright").innerHTML = myYear;
 
 
 
